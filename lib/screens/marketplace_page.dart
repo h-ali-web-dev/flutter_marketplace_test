@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_marketplace_test/pocketbase_apis/apis.dart';
+import 'package:pocketbase/pocketbase.dart';
 
-class MarketplacePage extends StatelessWidget {
+class MarketplacePage extends StatefulWidget {
   MarketplacePage({super.key});
+
+  @override
+  State<MarketplacePage> createState() => _MarketplacePageState();
+}
+
+class _MarketplacePageState extends State<MarketplacePage> {
+  late Future<List<Object?>> categoryItems;
+
+  @override
+  void initState() {
+    super.initState();
+    categoryItems = fetchCategories();
+  }
 
   List categoriesList = [
     {

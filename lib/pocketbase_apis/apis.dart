@@ -28,6 +28,21 @@ Future<List<RecordModel>> fetchSales() async {
   return sales;
 }
 
+Future<List<Object?>> fetchCategories() async {
+  final List<RecordModel> categories =
+      await pb.collection('category').getFullList(sort: '-created');
+
+  List<dynamic> categoryList = categories
+      .map((e) => {
+            "title": e.data['title'],
+            "name": e.data['name'],
+            "field": e.data['field']
+          })
+      .toList();
+  print(categoryList);
+  return categoryList;
+}
+
 Future<String?> loginUser(String username, String password) async {
   String? name;
   await pb
@@ -50,10 +65,8 @@ Future<bool> signupUser(String username, String email, String password,
     "passwordConfirm": confirmPassword
   };
   await pb.collection('users').create(body: body).then((value) {
-    print('new user created');
     isCreated = true;
   }).onError((error, stackTrace) {
-    print('error occured at user creation $error');
     isCreated = false;
   });
 
