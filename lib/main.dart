@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marketplace_test/common/image_upload_test.dart';
+import 'package:flutter_marketplace_test/screens/post_item_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter_marketplace_test/screens/details_page.dart';
 import 'package:flutter_marketplace_test/screens/home_page.dart';
@@ -30,6 +32,8 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/search', page: () => Search()),
         GetPage(name: '/settings', page: () => SettingsPage()),
         GetPage(name: '/marketplace', page: () => MarketplacePage()),
+        GetPage(name: '/test', page: () => ImageUploadPage()),
+        GetPage(name: '/postItem', page: () => PostItemPage()),
       ],
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),

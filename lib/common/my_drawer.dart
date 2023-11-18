@@ -60,7 +60,9 @@ Drawer myNewDrawer() {
         ListTile(
           leading: Icon(Icons.home),
           title: Text("home"),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed('/postItem');
+          },
         ),
         ListTile(
           leading: Icon(Icons.shopping_bag),
@@ -72,7 +74,9 @@ Drawer myNewDrawer() {
         ListTile(
           leading: Icon(Icons.collections),
           title: Text("Collection"),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed('/test');
+          },
         ),
         ListTile(
           leading: Icon(Icons.settings),

@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
+  image_picker: ^1.0.4
   pocketbase: ^0.16.0
 
 dev_dependencies:

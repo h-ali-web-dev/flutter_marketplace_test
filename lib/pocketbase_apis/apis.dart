@@ -27,3 +27,35 @@ Future<List<RecordModel>> fetchSales() async {
       await pb.collection('sale').getFullList(sort: '-created');
   return sales;
 }
+
+Future<String?> loginUser(String username, String password) async {
+  String? name;
+  await pb
+      .collection('users')
+      .authWithPassword(username, password)
+      .then((value) => name = value.record?.data['username'])
+      .onError((error, stackTrace) => print('error $error'));
+  return name;
+}
+
+Future<bool> signupUser(String username, String email, String password,
+    String confirmPassword) async {
+  bool isCreated = false;
+
+  final body = <String, dynamic>{
+    "username": username,
+    "email": email,
+    "emailVisibility": false,
+    "password": password,
+    "passwordConfirm": confirmPassword
+  };
+  await pb.collection('users').create(body: body).then((value) {
+    print('new user created');
+    isCreated = true;
+  }).onError((error, stackTrace) {
+    print('error occured at user creation $error');
+    isCreated = false;
+  });
+
+  return isCreated;
+}

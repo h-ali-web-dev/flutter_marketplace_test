@@ -22,21 +22,8 @@ class Home extends StatelessWidget {
           children: [
             FeaturedItems(),
             Sales(),
-            CategoryChips(),
+            // CategoryChips(),
             CatalogItems(),
-            Center(
-              child: SizedBox(
-                width: 250,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed('/search');
-                    },
-                    child: ListTile(
-                      title: Text("Search More"),
-                      trailing: Icon(Icons.search),
-                    )),
-              ),
-            )
           ],
         ),
       ),
