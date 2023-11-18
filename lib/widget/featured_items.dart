@@ -12,6 +12,7 @@ class FeaturedItems extends StatefulWidget {
 
 class _FeaturedItemsState extends State<FeaturedItems> {
   late Future<List<RecordModel>> featureItems;
+
   @override
   void initState() {
     super.initState();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_marketplace_test/pocketbase_apis/apis.dart';
-import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -12,6 +11,22 @@ class SignUpPage extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
+    var isError = false.obs;
+
+    void signupPressed() async {
+      bool userCreationState = await signupUser(
+          usernameController.text,
+          emailController.text,
+          passwordController.text,
+          confirmPasswordController.text);
+      if (userCreationState == true) {
+        isError.value = false;
+        Get.toNamed('/login');
+      } else {
+        isError.value = true;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -61,21 +76,7 @@ class SignUpPage extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               ElevatedButton(
-                onPressed: () {
-                  final body = <String, dynamic>{
-                    "username": usernameController.text,
-                    "email": emailController.text,
-                    "emailVisibility": false,
-                    "password": passwordController.text,
-                    "passwordConfirm": confirmPasswordController.text
-                  };
-                  pb.collection('users').create(body: body).then((value) {
-                    print('new user created');
-                    Get.toNamed('/login');
-                  }).onError((error, stackTrace) {
-                    print('error occured');
-                  });
-                },
+                onPressed: signupPressed,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -86,6 +87,15 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
               ),
+              Obx(() => isError.value
+                  ? Text(
+                      'An Error has occured on Sign Up!',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.red,
+                          backgroundColor: Colors.black12),
+                    )
+                  : Container()),
             ],
           ),
         ),

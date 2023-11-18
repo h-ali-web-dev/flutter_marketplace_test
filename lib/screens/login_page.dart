@@ -10,6 +10,22 @@ class LoginPage extends StatelessWidget {
   final StateController controller = Get.find();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void loginPressed() async {
+    String? res =
+        await loginUser(usernameController.text, passwordController.text);
+    String? name = res;
+    if (name != null) {
+      isError.value = false;
+      controller.setAuthentication(true);
+      controller.profileName.value = name;
+      Get.toNamed('/');
+    } else {
+      isError.value = true;
+      controller.clearState();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,21 +63,7 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      pb
-                          .collection('users')
-                          .authWithPassword(
-                              usernameController.text, passwordController.text)
-                          .then((value) {
-                        isError.value = false;
-                        controller.setAuthentication(true);
-                        controller.profileName.value =
-                            value.record?.data['username'];
-                        Get.toNamed('/');
-                      }).onError((error, stackTrace) {
-                        isError.value = true;
-                      });
-                    },
+                    onPressed: loginPressed,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
