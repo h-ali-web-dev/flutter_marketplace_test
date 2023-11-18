@@ -56,7 +56,7 @@ class _PostItemPageState extends State<PostItemPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Enter Credentials", style: TextStyle(fontSize: 24)),
+              Text("Enter Item Details", style: TextStyle(fontSize: 24)),
               Padding(padding: EdgeInsets.symmetric(vertical: 10)),
               TextField(
                 controller: titleController,

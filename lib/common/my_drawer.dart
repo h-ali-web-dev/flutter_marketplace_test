@@ -58,8 +58,8 @@ Drawer myNewDrawer() {
               )),
         Divider(color: Colors.white),
         ListTile(
-          leading: Icon(Icons.home),
-          title: Text("home"),
+          leading: Icon(Icons.post_add),
+          title: Text("Post Item"),
           onTap: () {
             Get.toNamed('/postItem');
           },
@@ -71,13 +71,13 @@ Drawer myNewDrawer() {
             Get.toNamed('/marketplace');
           },
         ),
-        ListTile(
-          leading: Icon(Icons.collections),
-          title: Text("Collection"),
-          onTap: () {
-            Get.toNamed('/test');
-          },
-        ),
+        // ListTile(
+        //   leading: Icon(Icons.collections),
+        //   title: Text("Collection"),
+        //   onTap: () {
+        //     Get.toNamed('/test');
+        //   },
+        // ),
         ListTile(
           leading: Icon(Icons.settings),
           title: Text("settings"),
