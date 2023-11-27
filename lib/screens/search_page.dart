@@ -19,6 +19,7 @@ class _SearchState extends State<Search> {
     searchResults = fetchItemsWithFilter(searchTextController.text);
   }
 
+  @override
   void initState() {
     _search();
     super.initState();
@@ -34,66 +35,70 @@ class _SearchState extends State<Search> {
           Row(
             children: [
               IconButton(
-                  padding: EdgeInsets.all(5),
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.arrow_back)),
+                padding: EdgeInsets.all(5),
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
               Expanded(
                 child: Container(
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: SearchBar(
-                      controller: searchTextController,
-                      hintText: 'Search here',
-                      // onChanged: (value) {
-                      //   if (value.isNotEmpty) {
-                      //     _search();
-                      //   }
-                      // },
-                      trailing: [
-                        IconButton(
-                          icon: Icon(Icons.filter_alt),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          onPressed: () {
-                            _search();
-                          },
-                        )
-                      ]),
+                    controller: searchTextController,
+                    hintText: 'Search here',
+                    // onChanged: (value) {
+                    //   if (value.isNotEmpty) {
+                    //     _search();
+                    //   }
+                    // },
+                    trailing: [
+                      IconButton(
+                        icon: Icon(Icons.filter_alt),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          _search();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
           Flexible(
-              child: Container(
-                  padding: context.isTablet
-                      ? EdgeInsets.symmetric(horizontal: 100)
-                      : EdgeInsets.all(10),
-                  child: FutureBuilder(
-                    future: searchResults,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        var data = snapshot.data;
-                        return ListView(
-                          children: [
-                            for (final item in data!)
-                              Container(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  item.data['title'],
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              )
-                          ],
-                        );
-                      }
-                      return Text("no results");
-                    },
-                  )))
+            child: Container(
+              padding: context.isTablet
+                  ? EdgeInsets.symmetric(horizontal: 100)
+                  : EdgeInsets.all(10),
+              child: FutureBuilder(
+                future: searchResults,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    var data = snapshot.data;
+                    return ListView(
+                      children: [
+                        for (final item in data!)
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            alignment: Alignment.center,
+                            child: Text(
+                              item.data['title'],
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                      ],
+                    );
+                  }
+                  return Text("no results");
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

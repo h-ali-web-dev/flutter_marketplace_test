@@ -33,13 +33,14 @@ Future<List<Object?>> fetchCategories() async {
       await pb.collection('category').getFullList(sort: '-created');
 
   List<dynamic> categoryList = categories
-      .map((e) => {
-            "title": e.data['title'],
-            "name": e.data['name'],
-            "field": e.data['field']
-          })
+      .map(
+        (e) => {
+          "title": e.data['title'],
+          "name": e.data['name'],
+          "field": e.data['field'],
+        },
+      )
       .toList();
-  print(categoryList);
   return categoryList;
 }
 
@@ -49,12 +50,16 @@ Future<String?> loginUser(String username, String password) async {
       .collection('users')
       .authWithPassword(username, password)
       .then((value) => name = value.record?.data['username'])
-      .onError((error, stackTrace) => print('error $error'));
+      .onError((error, stackTrace) => null);
   return name;
 }
 
-Future<bool> signupUser(String username, String email, String password,
-    String confirmPassword) async {
+Future<bool> signupUser(
+  String username,
+  String email,
+  String password,
+  String confirmPassword,
+) async {
   bool isCreated = false;
 
   final body = <String, dynamic>{
@@ -62,7 +67,7 @@ Future<bool> signupUser(String username, String email, String password,
     "email": email,
     "emailVisibility": false,
     "password": password,
-    "passwordConfirm": confirmPassword
+    "passwordConfirm": confirmPassword,
   };
   await pb.collection('users').create(body: body).then((value) {
     isCreated = true;

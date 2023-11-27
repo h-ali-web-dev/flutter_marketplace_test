@@ -20,11 +20,8 @@ class DetailsPage extends StatelessWidget {
           child: FutureBuilder(
             future: item,
             builder: (context, snapshot) {
-              print(item);
-              print(id);
               if (snapshot.hasData) {
                 var data = snapshot.data;
-                print(data?.data);
                 return Flex(
                   mainAxisAlignment: MainAxisAlignment.start,
                   direction:
@@ -36,25 +33,30 @@ class DetailsPage extends StatelessWidget {
                       child: Flexible(
                         flex: 1,
                         child: Image.network(
-                            '$pocketbaseUrl/api/files/${data?.collectionId}/${data?.id}/${data?.data['image']}',
-                            fit: BoxFit.cover),
+                          '$pocketbaseUrl/api/files/${data?.collectionId}/${data?.id}/${data?.data['image']}',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 20)),
                     Center(
                       child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(data?.data['title']),
-                            Text((data!.data['price'] -
-                                    (data!.data['price'] *
-                                        data!.data['sale'] /
-                                        100))
-                                .toStringAsFixed(1)),
-                            if (data!.data['sale'] > 0)
-                              Text('sale of ${data!.data['sale'].toString()}')
-                          ]),
-                    )
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(data?.data['title']),
+                          Text(
+                            '\$ ' +
+                                (data!.data['price'] -
+                                        (data.data['price'] *
+                                            data.data['sale'] /
+                                            100))
+                                    .toStringAsFixed(1),
+                          ),
+                          if (data.data['sale'] > 0)
+                            Text('sale of ${data.data['sale'].toString()} %'),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               }

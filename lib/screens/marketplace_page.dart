@@ -29,7 +29,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
         {"name": "decor name 4", 'icon': Icons.ac_unit},
         {"name": "decor name 5", 'icon': Icons.hail},
         {"name": "decor name 6", 'icon': Icons.villa},
-      ]
+      ],
     },
     {
       'name': "fashion",
@@ -40,7 +40,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
         {"name": "fashion name 4", 'icon': Icons.shopping_cart},
         {"name": "fashion name 5", 'icon': Icons.local_print_shop_sharp},
         {"name": "fashion name 6", 'icon': Icons.privacy_tip_outlined},
-      ]
+      ],
     },
     {
       'name': "appliances",
@@ -57,9 +57,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
         {"name": "appliances name 4", 'icon': Icons.shopping_cart},
         {"name": "appliances name 5", 'icon': Icons.local_print_shop_sharp},
         {"name": "appliances name 6", 'icon': Icons.privacy_tip_outlined},
-      ]
+      ],
     },
-    {'name': "home", "children": []}
+    {'name': "home", "children": []},
   ];
 
   @override
@@ -83,16 +83,17 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   title: Text(categoriesList[index]['name']),
                   children: [
                     Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        alignment: WrapAlignment.center,
-                        children: [
-                          if (categoriesList[index]['children'].isEmpty)
-                            Text("no children found")
-                          else
-                            for (final cat in categoriesList[index]['children'])
-                              CategoryIconChip(cat['name'], cat['icon']),
-                        ]),
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        if (categoriesList[index]['children'].isEmpty)
+                          Text("no children found")
+                        else
+                          for (final cat in categoriesList[index]['children'])
+                            CategoryIconChip(cat['name'], cat['icon']),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -112,7 +113,8 @@ class CategoryIconChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-        label: Column(children: [Icon(chipIcon), Text(chipName)]),
-        onSelected: (i) {});
+      label: Column(children: [Icon(chipIcon), Text(chipName)]),
+      onSelected: (i) {},
+    );
   }
 }

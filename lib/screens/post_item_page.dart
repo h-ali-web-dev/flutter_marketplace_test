@@ -19,19 +19,21 @@ class _PostItemPageState extends State<PostItemPage> {
   File? selectedImage;
 
   onUploadImage() async {
-    final record = await pb.collection('catalog').create(body: {
-      'title': titleController.text,
-      "price": priceController.text,
-      "sale": saleController.text
-    }, files: [
-      http.MultipartFile(
-        'image',
-        selectedImage!.readAsBytes().asStream(),
-        selectedImage!.lengthSync(),
-        filename: selectedImage!.path.split('/').last,
-      ),
-    ]);
-    print(record);
+    await pb.collection('catalog').create(
+      body: {
+        'title': titleController.text,
+        "price": priceController.text,
+        "sale": saleController.text,
+      },
+      files: [
+        http.MultipartFile(
+          'image',
+          selectedImage!.readAsBytes().asStream(),
+          selectedImage!.lengthSync(),
+          filename: selectedImage!.path.split('/').last,
+        ),
+      ],
+    );
   }
 
   Future getImage() async {
