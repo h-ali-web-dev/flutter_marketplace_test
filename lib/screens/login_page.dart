@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
       Get.toNamed('/');
     } else {
       isError.value = true;
-      controller.clearState();
+      controller.clearAuthState();
     }
   }
 
@@ -90,17 +90,21 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Obx(() => isError.value
-                  ? Text(
-                      'An Error has occured on Login!',
-                      style: TextStyle(
+              Obx(
+                () => isError.value
+                    ? Text(
+                        'An Error has occured on Login!',
+                        style: TextStyle(
                           fontSize: 24,
                           color: Colors.red,
-                          backgroundColor: Colors.black12),
-                    )
-                  : Container()),
+                          backgroundColor: Colors.black12,
+                        ),
+                      )
+                    : Container(),
+              ),
               Text(
-                  'test login credentials: \nusername: username1 \npassword: username1')
+                'test login credentials: \nusername: username1 \npassword: username1',
+              ),
             ],
           ),
         ),

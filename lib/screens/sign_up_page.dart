@@ -15,10 +15,11 @@ class SignUpPage extends StatelessWidget {
 
     void signupPressed() async {
       bool userCreationState = await signupUser(
-          usernameController.text,
-          emailController.text,
-          passwordController.text,
-          confirmPasswordController.text);
+        usernameController.text,
+        emailController.text,
+        passwordController.text,
+        confirmPasswordController.text,
+      );
       if (userCreationState == true) {
         isError.value = false;
         Get.toNamed('/login');
@@ -87,15 +88,18 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Obx(() => isError.value
-                  ? Text(
-                      'An Error has occured on Sign Up!',
-                      style: TextStyle(
+              Obx(
+                () => isError.value
+                    ? Text(
+                        'An Error has occured on Sign Up!',
+                        style: TextStyle(
                           fontSize: 24,
                           color: Colors.red,
-                          backgroundColor: Colors.black12),
-                    )
-                  : Container()),
+                          backgroundColor: Colors.black12,
+                        ),
+                      )
+                    : Container(),
+              ),
             ],
           ),
         ),
